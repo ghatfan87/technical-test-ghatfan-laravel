@@ -17,20 +17,15 @@ class AuthController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function register($request)
+    public function register(Request $request)
     {
 
         try{
-            $validator = Validator::make($request->all(),[
-                'name' => "required|name",
-                'email' => "required|email",
-                'password' => "required|password"
+            $request->validate([
+                'name' => "required|string|max:255",
+                'email' => "required|email|unique:users,email",
+                'password' => "required|string|min:8"
             ]);
-
-
-            if ($validator->fails()) {
-                return ApiFormatter::createAPI(400, 'Validation Failed', $validator->errors());
-            }
 
             $user = User::create([
                 'name' => $request->name,
@@ -61,14 +56,10 @@ class AuthController extends Controller
         public function login(Request $request)
     {
         try {
-            $validator = Validator::make($request->all(), [
-                'email' => 'required|email',
-                'password' => 'required|string|min:6'
+            $request->validate([
+                'email' => "required|email",
+                'password' => "required|string|min:8"
             ]);
-
-            if ($validator->fails()) {
-                return ApiFormatter::createAPI(400, 'Validation Failed', $validator->errors());
-            }
 
             if (!Auth::attempt($request->only('email', 'password'))) {
                 return ApiFormatter::createAPI(401, 'Email or password is incorrect');

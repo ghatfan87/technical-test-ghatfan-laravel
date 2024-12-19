@@ -43,16 +43,12 @@ class ChecklistController extends Controller
     public function store(Request $request)
     {
         try{
-            $validator = Validator::make($request->all(),[
+            $request->validate([
                 'title' => "required|title",
                 'description' => "nullable|description",
                 'user_id' => "user_id",
             ]);
 
-
-            if ($validator->fails()) {
-                return ApiFormatter::createAPI(400, 'Validation Failed', $validator->errors());
-            }
 
             $checklist = Checklist::create([
                 'title' => $request->title,
@@ -94,16 +90,12 @@ class ChecklistController extends Controller
     public function update(Request $request,$id)
     {
         try{
-            $validator = Validator::make($request->all(),[
+            $request->validate([
                 'title' => "required|title",
                 'description' => "nullable|description",
                 'user_id' => "user_id",
             ]);
 
-
-            if ($validator->fails()) {
-                return ApiFormatter::createAPI(400, 'Validation Failed', $validator->errors());
-            }
 
             $checklist = Checklist::findorFail($id);
 

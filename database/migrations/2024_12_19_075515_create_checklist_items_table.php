@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('title');
             $table->text('description')->nullable();
-            $table->enum('status',['complete','pending','on-going']);
+            $table->enum('status',['completed','pending','in-progress','overdue']);
             $table->unsignedBigInteger('checklist_id');
             $table->timestamps();
         });

@@ -13,4 +13,6 @@ class ChecklistItem extends Model
         'checklist_id'
     ];
 
+    public const VALID_STATUSES = ['completed', 'in progress', 'pending','overdue'];
+
 }
