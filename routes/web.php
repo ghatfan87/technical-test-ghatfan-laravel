@@ -16,7 +16,7 @@ Route::middleware('auth:sanctum')->group(function () {
     //checklist item
     Route::prefix('checklists/{checklist}')->group(function () {
         Route::get('/items', [ChecklistItemController::class, 'index']);
-        Route::post('/createItems', [ChecklistItemController::class, 'store']);
+        Route::post('/items', [ChecklistItemController::class, 'store']);
         Route::get('/items/{item}', [ChecklistItemController::class, 'show']);
         Route::put('/items/{item}', [ChecklistItemController::class, 'update']);
         Route::patch('/items/{item}/status', [ChecklistItemController::class, 'updateStatus']);
