@@ -26,7 +26,8 @@ class ChecklistItemController extends Controller
             $checklistItems = ChecklistItem::where('checklist_id', $checklistId)->get();
 
             return ApiFormatter::createAPI(200, 'Success', [
-                'items' => $checklist,
+                'checklist' => $checklist,
+                'items' => $checklistItems,
 
             ]);
         } catch (Exception $error) {
